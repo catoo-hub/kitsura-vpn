@@ -148,27 +148,6 @@ jobs:
           pnpm i
           pnpm run prebuild ${{ matrix.target }}
 
-      - name: Install minisign (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          # Download minisign binary directly
-          $minisignUrl = "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip"
-          $minisignZip = "$env:TEMP\minisign.zip"
-          $minisignDir = "$env:TEMP\minisign"
-          
-          Write-Host "Downloading minisign..."
-          Invoke-WebRequest -Uri $minisignUrl -OutFile $minisignZip
-          
-          Write-Host "Extracting minisign..."
-          Expand-Archive -Path $minisignZip -DestinationPath $minisignDir -Force
-          
-          # Add x64 version to PATH (not aarch64)
-          $minisignPath = Join-Path $minisignDir "minisign-win64\x64"
-          echo $minisignPath | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          
-          Write-Host "Minisign x64 path added: $minisignPath"
-          Write-Host "Minisign installed successfully"
-
       - name: Tauri build
         id: build
         uses: tauri-apps/tauri-action@v0
@@ -192,64 +171,6 @@ jobs:
             Rename-Item $file.FullName $newName
           }
 
-      - name: Sign files with minisign (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          # Setup minisign key from secrets
-          $keyDir = "$env:USERPROFILE\.minisign"
-          New-Item -ItemType Directory -Force -Path $keyDir
-          echo "${{ secrets.MINISIGN_PRIVATE_KEY }}" | Out-File -FilePath "$keyDir\minisign.key" -Encoding utf8
-
-          # Find minisign executable in extracted archive
-          Write-Host "Searching for minisign.exe..."
-          $minisignFiles = Get-ChildItem "$env:TEMP\minisign" -Name "minisign.exe" -Recurse
-          
-          if ($minisignFiles.Count -eq 0) {
-            Write-Error "No minisign.exe found in extracted archive!"
-            Get-ChildItem "$env:TEMP\minisign" -Recurse | ForEach-Object { Write-Host $_.FullName }
-            exit 1
-          }
-          
-          # Use the first x64 version found, or any version if x64 not found
-          $minisignExe = $null
-          foreach ($file in $minisignFiles) {
-            $fullPath = Join-Path "$env:TEMP\minisign" $file
-            Write-Host "Found minisign at: $fullPath"
-            
-            # Prefer x64 version
-            if ($file -like "*x64*" -or $file -like "*x86_64*") {
-              $minisignExe = $fullPath
-              Write-Host "Using x64 version: $minisignExe"
-              break
-            } elseif ($minisignExe -eq $null) {
-              $minisignExe = $fullPath
-            }
-          }
-          
-          if ($minisignExe -eq $null) {
-            Write-Error "Could not determine minisign executable path!"
-            exit 1
-          }
-          
-          Write-Host "✅ Using minisign at: $minisignExe"
-          
-          # Test minisign version
-          & $minisignExe --version
-
-          # Sign all setup files
-          $files = Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.exe"
-          foreach ($file in $files) {
-            Write-Host "Signing: $($file.Name)"
-            & $minisignExe -Sm $file.FullName -s "$keyDir\minisign.key"
-          }
-          
-          # List created signature files for debugging
-          Write-Host "Created signature files:"
-          Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.minisig" | ForEach-Object { Write-Host $_.Name }
-        env:
-          MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
-
       - name: Upload Release
         uses: ncipollo/release-action@v1
         with:
@@ -258,7 +179,7 @@ jobs:
           name: ${{ steps.version.outputs.version }}
           body: ${{ steps.version.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe,src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.minisig"
+          artifacts: "src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe"
 
   release-for-fixed-webview2:
     name: Release Build for Fixed WebView2
@@ -301,27 +222,6 @@ jobs:
           pnpm i
           pnpm run prebuild ${{ matrix.target }}
 
-      - name: Install minisign (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          # Download minisign binary directly
-          $minisignUrl = "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip"
-          $minisignZip = "$env:TEMP\minisign.zip"
-          $minisignDir = "$env:TEMP\minisign"
-          
-          Write-Host "Downloading minisign..."
-          Invoke-WebRequest -Uri $minisignUrl -OutFile $minisignZip
-          
-          Write-Host "Extracting minisign..."
-          Expand-Archive -Path $minisignZip -DestinationPath $minisignDir -Force
-          
-          # Add x64 version to PATH (not aarch64)
-          $minisignPath = Join-Path $minisignDir "minisign-win64\x64"
-          echo $minisignPath | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          
-          Write-Host "Minisign x64 path added: $minisignPath"
-          Write-Host "Minisign installed successfully"
-
       - name: Download WebView2 Runtime
         run: |
           Invoke-WebRequest -Uri https://github.com/westinyang/WebView2RuntimeArchive/releases/download/133.0.3065.92/Microsoft.WebView2.FixedVersionRuntime.133.0.3065.92.${{ matrix.arch }}.cab -OutFile Microsoft.WebView2.FixedVersionRuntime.133.0.3065.92.${{ matrix.arch }}.cab
@@ -355,66 +255,12 @@ jobs:
             Rename-Item $file.FullName $newName
           }
 
-          $files = Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*-setup.exe.sig"
+          # Rename .sig files if they exist (Tauri signing)
+          $files = Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*-setup.exe.sig" -ErrorAction SilentlyContinue
           foreach ($file in $files) {
             $newName = $file.Name -replace "_${{steps.build.outputs.appVersion}}_", "_" -replace "-setup\.exe\.sig$", "_fixed_webview2-setup.exe.sig"
             Rename-Item $file.FullName $newName
           }
-
-      - name: Sign files with minisign (Windows WebView2)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          # Setup minisign key from secrets
-          $keyDir = "$env:USERPROFILE\.minisign"
-          New-Item -ItemType Directory -Force -Path $keyDir
-          echo "${{ secrets.MINISIGN_PRIVATE_KEY }}" | Out-File -FilePath "$keyDir\minisign.key" -Encoding utf8
-          
-          # Find minisign executable in extracted archive
-          Write-Host "Searching for minisign.exe..."
-          $minisignFiles = Get-ChildItem "$env:TEMP\minisign" -Name "minisign.exe" -Recurse
-          
-          if ($minisignFiles.Count -eq 0) {
-            Write-Error "No minisign.exe found in extracted archive!"
-            Get-ChildItem "$env:TEMP\minisign" -Recurse | ForEach-Object { Write-Host $_.FullName }
-            exit 1
-          }
-          
-          # Use the first x64 version found, or any version if x64 not found
-          $minisignExe = $null
-          foreach ($file in $minisignFiles) {
-            $fullPath = Join-Path "$env:TEMP\minisign" $file
-            Write-Host "Found minisign at: $fullPath"
-            
-            # Prefer x64 version
-            if ($file -like "*x64*" -or $file -like "*x86_64*") {
-              $minisignExe = $fullPath
-              Write-Host "Using x64 version: $minisignExe"
-              break
-            } elseif ($minisignExe -eq $null) {
-              $minisignExe = $fullPath
-            }
-          }
-          
-          if ($minisignExe -eq $null) {
-            Write-Error "Could not determine minisign executable path!"
-            exit 1
-          }
-          
-          Write-Host "✅ Using minisign at: $minisignExe"
-
-          # Sign all setup files
-          $files = Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.exe"
-          foreach ($file in $files) {
-            Write-Host "Signing: $($file.Name)"
-            & $minisignExe -Sm $file.FullName -s "$keyDir\minisign.key"
-          }
-          
-          # List created signature files for debugging
-          Write-Host "Created signature files:"
-          Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.minisig" | ForEach-Object { Write-Host $_.Name }
-        env:
-          MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
 
       - name: Upload Release
         uses: softprops/action-gh-release@v2
@@ -424,7 +270,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe
-            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.minisig
+            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe.sig
 
       - name: Portable Bundle
         run: pnpm portable-fixed-webview2 ${{ matrix.target }}
