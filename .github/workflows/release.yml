@@ -151,8 +151,23 @@ jobs:
       - name: Install minisign (Windows)
         if: runner.os == 'Windows'
         run: |
-          winget install jedisct1.minisign
-          echo "$env:USERPROFILE\AppData\Local\Microsoft\WinGet\Packages\jedisct1.minisign_Microsoft.Winget.Source_8wekyb3d8bbwe\minisign-win64\x86_64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          # Download minisign binary directly
+          $minisignUrl = "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip"
+          $minisignZip = "$env:TEMP\minisign.zip"
+          $minisignDir = "$env:TEMP\minisign"
+          
+          Write-Host "Downloading minisign..."
+          Invoke-WebRequest -Uri $minisignUrl -OutFile $minisignZip
+          
+          Write-Host "Extracting minisign..."
+          Expand-Archive -Path $minisignZip -DestinationPath $minisignDir -Force
+          
+          # Add to PATH
+          $minisignExe = Get-ChildItem -Path $minisignDir -Name "minisign.exe" -Recurse | Select-Object -First 1
+          $minisignPath = Split-Path (Join-Path $minisignDir $minisignExe) -Parent
+          echo $minisignPath | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          
+          Write-Host "Minisign installed successfully"
 
       - name: Tauri build
         id: build
@@ -196,14 +211,14 @@ jobs:
           MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
 
       - name: Upload Release
-        uses: softprops/action-gh-release@v2
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: v${{steps.build.outputs.appVersion}}
-          name: "Kitsura VPN v${{steps.build.outputs.appVersion}}"
+          allowUpdates: true
+          tag: ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
+          body: ${{ steps.version.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: |
-            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*
-            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.minisig
+          artifacts: "src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe,src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe.sig"
 
   release-for-fixed-webview2:
     name: Release Build for Fixed WebView2
@@ -246,6 +261,27 @@ jobs:
           pnpm i
           pnpm run prebuild ${{ matrix.target }}
 
+      - name: Install minisign (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          # Download minisign binary directly
+          $minisignUrl = "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip"
+          $minisignZip = "$env:TEMP\minisign.zip"
+          $minisignDir = "$env:TEMP\minisign"
+          
+          Write-Host "Downloading minisign..."
+          Invoke-WebRequest -Uri $minisignUrl -OutFile $minisignZip
+          
+          Write-Host "Extracting minisign..."
+          Expand-Archive -Path $minisignZip -DestinationPath $minisignDir -Force
+          
+          # Add to PATH
+          $minisignExe = Get-ChildItem -Path $minisignDir -Name "minisign.exe" -Recurse | Select-Object -First 1
+          $minisignPath = Split-Path (Join-Path $minisignDir $minisignExe) -Parent
+          echo $minisignPath | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          
+          Write-Host "Minisign installed successfully"
+
       - name: Download WebView2 Runtime
         run: |
           Invoke-WebRequest -Uri https://github.com/westinyang/WebView2RuntimeArchive/releases/download/133.0.3065.92/Microsoft.WebView2.FixedVersionRuntime.133.0.3065.92.${{ matrix.arch }}.cab -OutFile Microsoft.WebView2.FixedVersionRuntime.133.0.3065.92.${{ matrix.arch }}.cab
@@ -285,13 +321,33 @@ jobs:
             Rename-Item $file.FullName $newName
           }
 
+      - name: Sign files with minisign (Windows WebView2)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          # Setup minisign key from secrets
+          $keyDir = "$env:USERPROFILE\.minisign"
+          New-Item -ItemType Directory -Force -Path $keyDir
+          echo "${{ secrets.MINISIGN_PRIVATE_KEY }}" | Out-File -FilePath "$keyDir\minisign.key" -Encoding utf8
+          
+          # Sign all setup files
+          $files = Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.exe"
+          foreach ($file in $files) {
+            Write-Host "Signing: $($file.Name)"
+            minisign -Sm $file.FullName -s "$keyDir\minisign.key"
+          }
+        env:
+          MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
+
       - name: Upload Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{steps.build.outputs.appVersion}}
           name: "Kitsura VPN v${{steps.build.outputs.appVersion}}"
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*
+          files: |
+            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe
+            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe.sig
 
       - name: Portable Bundle
         run: pnpm portable-fixed-webview2 ${{ matrix.target }}
