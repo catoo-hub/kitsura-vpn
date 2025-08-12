@@ -268,6 +268,7 @@ jobs:
           tag_name: v${{steps.build.outputs.appVersion}}
           name: "Kitsura VPN v${{steps.build.outputs.appVersion}}"
           token: ${{ secrets.GITHUB_TOKEN }}
+          overwrite: true
           files: |
             src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe
             src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe.sig
