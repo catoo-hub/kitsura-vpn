@@ -162,11 +162,11 @@ jobs:
           Write-Host "Extracting minisign..."
           Expand-Archive -Path $minisignZip -DestinationPath $minisignDir -Force
           
-          # Add to PATH
-          $minisignExe = Get-ChildItem -Path $minisignDir -Name "minisign.exe" -Recurse | Select-Object -First 1
-          $minisignPath = Split-Path (Join-Path $minisignDir $minisignExe) -Parent
+          # Add x64 version to PATH (not aarch64)
+          $minisignPath = Join-Path $minisignDir "minisign-win64\x64"
           echo $minisignPath | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           
+          Write-Host "Minisign x64 path added: $minisignPath"
           Write-Host "Minisign installed successfully"
 
       - name: Tauri build
@@ -279,11 +279,11 @@ jobs:
           Write-Host "Extracting minisign..."
           Expand-Archive -Path $minisignZip -DestinationPath $minisignDir -Force
           
-          # Add to PATH
-          $minisignExe = Get-ChildItem -Path $minisignDir -Name "minisign.exe" -Recurse | Select-Object -First 1
-          $minisignPath = Split-Path (Join-Path $minisignDir $minisignExe) -Parent
+          # Add x64 version to PATH (not aarch64)
+          $minisignPath = Join-Path $minisignDir "minisign-win64\x64"
           echo $minisignPath | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           
+          Write-Host "Minisign x64 path added: $minisignPath"
           Write-Host "Minisign installed successfully"
 
       - name: Download WebView2 Runtime
