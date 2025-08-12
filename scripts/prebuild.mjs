@@ -429,7 +429,10 @@ async function resolveLocales() {
 /**
  * main
  */
-const SERVICE_URL = `https://github.com/catoo-hub/kitsura-service/releases/download/${SIDECAR_HOST}`;
+// Fix for kitsura-service URL - use correct release tag
+const SERVICE_SIDECAR_HOST =
+  platform === "win32" ? "x86_64-pc-windows-msvc" : SIDECAR_HOST;
+const SERVICE_URL = `https://github.com/catoo-hub/kitsura-service/releases/download/${SERVICE_SIDECAR_HOST}`;
 
 const resolveService = () => {
   let ext = platform === "win32" ? ".exe" : "";

@@ -427,18 +427,18 @@ Function .onInit
   !endif
 FunctionEnd
 
-!macro CheckAllKoalaProcesses
-  ; Check if kitsura-vpnvice.exe is running
+!macro CheckAllKitsuraProcesses
+  ; Check if kitsura-service.exe is running
   !if "${INSTALLMODE}" == "currentUser"
-    nsis_tauri_utils::FindProcessCurrentUser "kitsura-vpnvice.exe"
+    nsis_tauri_utils::FindProcessCurrentUser "kitsura-service.exe"
   !else
-    nsis_tauri_utils::FindProcess "kitsura-vpnvice.exe"
+    nsis_tauri_utils::FindProcess "kitsura-service.exe"
   !endif
   Pop $R0
   ${If} $R0 = 0
-    DetailPrint "Kill kitsura-vpnvice.exe..."
+    DetailPrint "Kill kitsura-service.exe..."
     !if "${INSTALLMODE}" == "currentUser"
-      nsis_tauri_utils::KillProcessCurrentUser "kitsura-vpnvice.exe"
+      nsis_tauri_utils::KillProcessCurrentUser "kitsura-service.exe"
     !else
       nsis_tauri_utils::KillProcess "kitsura-vpnvice.exe"
     !endif
@@ -509,22 +509,22 @@ FunctionEnd
   ${EndIf}
 !macroend
 
-!macro StartKoalaService
+!macro StartKitsuraService
   ; Check if the service exists
-  SimpleSC::ExistsService "koala_clash_service"
+  SimpleSC::ExistsService "kitsura_service"
   Pop $0  ; 0：service exists；other: service not exists
   ; Service exists
   ${If} $0 == 0
     Push $0
     ; Check if the service is running
-    SimpleSC::ServiceIsRunning "koala_clash_service"
+    SimpleSC::ServiceIsRunning "kitsura_service"
     Pop $0 ; returns an errorcode (<>0) otherwise success (0)
     Pop $1 ; returns 1 (service is running) - returns 0 (service is not running)
     ${If} $0 == 0
       Push $0
       ${If} $1 == 0
-            DetailPrint "Restart Koala Clash Service..."
-            SimpleSC::StartService "koala_clash_service" "" 30
+            DetailPrint "Restart Kitsura VPN Service..."
+            SimpleSC::StartService "kitsura_service" "" 30
       ${EndIf}
     ${ElseIf} $0 != 0
           Push $0
@@ -535,35 +535,35 @@ FunctionEnd
   ${EndIf}
 !macroend
 
-!macro RemoveKoalaService
+!macro RemoveKitsuraService
   ; Check if the service exists
-  SimpleSC::ExistsService "koala_clash_service"
+  SimpleSC::ExistsService "kitsura_service"
   Pop $0  ; 0：service exists；other: service not exists
   ; Service exists
   ${If} $0 == 0
     Push $0
     ; Check if the service is running
-    SimpleSC::ServiceIsRunning "koala_clash_service"
+    SimpleSC::ServiceIsRunning "kitsura_service"
     Pop $0 ; returns an errorcode (<>0) otherwise success (0)
     Pop $1 ; returns 1 (service is running) - returns 0 (service is not running)
     ${If} $0 == 0
       Push $0
       ${If} $1 == 1
-        DetailPrint "Stop Koala Clash Service..."
-        SimpleSC::StopService "koala_clash_service" 1 30
+        DetailPrint "Stop Kitsura VPN Service..."
+        SimpleSC::StopService "kitsura_service" 1 30
         Pop $0 ; returns an errorcode (<>0) otherwise success (0)
         ${If} $0 == 0
-              DetailPrint "Removing Koala Clash Service..."
-              SimpleSC::RemoveService "koala_clash_service"
+              DetailPrint "Removing Kitsura VPN Service..."
+              SimpleSC::RemoveService "kitsura_service"
         ${ElseIf} $0 != 0
                   Push $0
                   SimpleSC::GetErrorMessage
                   Pop $0
-                  MessageBox MB_OK|MB_ICONSTOP "Koala Clash Service Stop Error ($0)"
+                  MessageBox MB_OK|MB_ICONSTOP "Kitsura VPN Service Stop Error ($0)"
         ${EndIf}
   ${ElseIf} $1 == 0
-        DetailPrint "Removing Koala Clash Service..."
-        SimpleSC::RemoveService "koala_clash_service"
+        DetailPrint "Removing Kitsura VPN Service..."
+        SimpleSC::RemoveService "kitsura_service"
   ${EndIf}
     ${ElseIf} $0 != 0
           Push $0
@@ -764,7 +764,7 @@ Section Install
   SetOutPath $INSTDIR
   nsExec::Exec 'netsh int tcp res'
   !insertmacro CheckIfAppIsRunning
-  !insertmacro CheckAllKoalaProcesses
+  !insertmacro CheckAllKitsuraProcesses
 
   ; 清理自启动注册表项
   DetailPrint "Cleaning auto-launch registry entries..."
@@ -772,15 +772,15 @@ Section Install
   StrCpy $R1 "Software\Microsoft\Windows\CurrentVersion\Run"
   
   SetRegView 64  
-  ; 清理旧版本的注册表项 (Koala Clash)
-  ReadRegStr $R2 HKCU "$R1" "Koala Clash"
+  ; 清理旧版本的注册表项 (Kitsura VPN)
+  ReadRegStr $R2 HKCU "$R1" "Kitsura VPN"
   ${If} $R2 != ""
-    DeleteRegValue HKCU "$R1" "Koala Clash"
+    DeleteRegValue HKCU "$R1" "Kitsura VPN"
   ${EndIf}
   
-  ReadRegStr $R2 HKLM "$R1" "Koala Clash"
+  ReadRegStr $R2 HKLM "$R1" "Kitsura VPN"
   ${If} $R2 != ""
-    DeleteRegValue HKLM "$R1" "Koala Clash"
+    DeleteRegValue HKLM "$R1" "Kitsura VPN"
   ${EndIf}
 
   ; 清理新版本的注册表项 (kitsura-vpn)
@@ -796,8 +796,8 @@ Section Install
 
   ; Delete old files before installation
     ; Delete kitsura-vpn.desktop
-  IfFileExists "$INSTDIR\Koala Clash.exe" 0 +2
-    Delete "$INSTDIR\Koala Clash.exe"
+  IfFileExists "$INSTDIR\Kitsura VPN.exe" 0 +2
+    Delete "$INSTDIR\Kitsura VPN.exe"
   
   ; Copy main executable
   File "${MAINBINARYSRCPATH}"
@@ -815,7 +815,7 @@ Section Install
     File /a "/oname={{this}}" "{{@key}}"
   {{/each}}
 
-  !insertmacro StartKoalaService
+  !insertmacro StartKitsuraService
 
   ; Create uninstaller
   WriteUninstaller "$INSTDIR\uninstall.exe"
@@ -921,8 +921,8 @@ Section Uninstall
   Delete "$APPDATA\io.github.kitsura-vpn\window-state.json"
 
   !insertmacro CheckIfAppIsRunning
-  !insertmacro CheckAllKoalaProcesses
-  !insertmacro RemoveKoalaService
+  !insertmacro CheckAllKitsuraProcesses
+  !insertmacro RemoveKitsuraService
 
   ; 清理自启动注册表项
   DetailPrint "Cleaning auto-launch registry entries..."
@@ -930,15 +930,15 @@ Section Uninstall
   StrCpy $R1 "Software\Microsoft\Windows\CurrentVersion\Run"
   
   SetRegView 64
-  ; 清理旧版本的注册表项 (Koala Clash)
-  ReadRegStr $R2 HKCU "$R1" "Koala Clash"
+  ; 清理旧版本的注册表项 (Kitsura VPN)
+  ReadRegStr $R2 HKCU "$R1" "Kitsura VPN"
   ${If} $R2 != ""
-    DeleteRegValue HKCU "$R1" "Koala Clash"
+    DeleteRegValue HKCU "$R1" "Kitsura VPN"
   ${EndIf}
   
-  ReadRegStr $R2 HKLM "$R1" "Koala Clash"
+  ReadRegStr $R2 HKLM "$R1" "Kitsura VPN"
   ${If} $R2 != ""
-    DeleteRegValue HKLM "$R1" "Koala Clash"
+    DeleteRegValue HKLM "$R1" "Kitsura VPN"
   ${EndIf}
 
   ; 清理新版本的注册表项 (kitsura-vpn)
@@ -967,8 +967,8 @@ Section Uninstall
   {{/each}}
 
   ; Delete kitsura-vpn.desktop
-  IfFileExists "$INSTDIR\Koala Clash.exe" 0 +2
-    Delete "$INSTDIR\Koala Clash.exe"
+  IfFileExists "$INSTDIR\Kitsura VPN.exe" 0 +2
+    Delete "$INSTDIR\Kitsura VPN.exe"
 
   ; Delete uninstaller
   Delete "$INSTDIR\uninstall.exe"

@@ -177,7 +177,7 @@ const rules: {
     validator: (value) => (+value ? true : false),
   },
   { name: "IN-TYPE", example: "SOCKS/HTTP" },
-  { name: "IN-USER", example: "mihomo" },
+  { name: "IN-USER", example: "kitsura" },
   { name: "IN-NAME", example: "ss" },
   { name: "SUB-RULE", example: "(NETWORK,tcp)" },
   { name: "RULE-SET", example: "providername", noResolve: true },

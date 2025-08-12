@@ -51,6 +51,7 @@ export default defineConfig({
     sourcemap: false,
     cssCodeSplit: true,
     cssMinify: true,
+    assetsInlineLimit: 4096, // Files smaller than 4KB will be inlined
     rollupOptions: {
       treeshake: {
         preset: "recommended",

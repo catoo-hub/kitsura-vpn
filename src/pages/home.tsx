@@ -9,6 +9,9 @@ import { useLockFn } from "ahooks";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
+// Import video files
+import backgroundVideo from "@/assets/video/background.webm";
+
 import { useProfiles } from "@/hooks/use-profiles";
 import {
   ProfileViewer,
@@ -220,7 +223,7 @@ const MinimalHomePage: React.FC = () => {
           className="w-full h-full object-cover"
           style={{ pointerEvents: "none" }}
         >
-          <source src="../assets/video/background.webm" type="video/webm" />
+          <source src={backgroundVideo} type="video/webm" />
           Ваш браузер не поддерживает видео.
         </video>
       </div>

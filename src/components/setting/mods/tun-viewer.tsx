@@ -74,7 +74,7 @@ export const TunViewer = forwardRef<DialogRef>((props, ref) => {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState({
     stack: "gvisor" as StackMode,
-    device: OS === "macos" ? "utun1024" : "Mihomo",
+    device: OS === "macos" ? "utun1024" : "Kitsura",
     autoRoute: true,
     autoDetectInterface: true,
     dnsHijack: ["any:53"],
@@ -90,7 +90,7 @@ export const TunViewer = forwardRef<DialogRef>((props, ref) => {
         // Добавляем утверждение типа, чтобы TypeScript был уверен в значении
         stack: (clash?.tun.stack as StackMode) ?? "gvisor",
         // --- КОНЕЦ ИСПРАВЛЕНИЯ ---
-        device: clash?.tun.device ?? (OS === "macos" ? "utun1024" : "Mihomo"),
+        device: clash?.tun.device ?? (OS === "macos" ? "utun1024" : "Kitsura"),
         autoRoute: clash?.tun["auto-route"] ?? true,
         autoDetectInterface: clash?.tun["auto-detect-interface"] ?? true,
         dnsHijack: clash?.tun["dns-hijack"] ?? ["any:53"],
@@ -104,7 +104,7 @@ export const TunViewer = forwardRef<DialogRef>((props, ref) => {
   const resetToDefaults = () => {
     setValues({
       stack: "gvisor",
-      device: OS === "macos" ? "utun1024" : "Mihomo",
+      device: OS === "macos" ? "utun1024" : "Kitsura",
       autoRoute: true,
       autoDetectInterface: true,
       dnsHijack: ["any:53"],
@@ -121,7 +121,7 @@ export const TunViewer = forwardRef<DialogRef>((props, ref) => {
           values.device === ""
             ? OS === "macos"
               ? "utun1024"
-              : "Mihomo"
+              : "Kitsura"
             : values.device,
         "auto-route": values.autoRoute,
         "auto-detect-interface": values.autoDetectInterface,
@@ -169,7 +169,7 @@ export const TunViewer = forwardRef<DialogRef>((props, ref) => {
             <Input
               className="h-8 w-40"
               value={values.device}
-              placeholder="Mihomo"
+              placeholder="Kitsura"
               onChange={(e) =>
                 setValues((v) => ({ ...v, device: e.target.value }))
               }

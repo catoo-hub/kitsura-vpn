@@ -1,5 +1,5 @@
 {
-  "version": "0.2.5",
+  "version": "0.0.1",
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "bundle": {
     "active": true,
@@ -28,7 +28,7 @@
   "identifier": "io.github.kitsura-vpn",
   "plugins": {
     "updater": {
-      "active": false,
+      "active": true,
       "pubkey": "RWSUkggwk9X2NQrfuNzOc7gcErukBClD7y9uBV8rWVJ04pO9XKVtrwgw",
       "endpoints": [
         "https://github.com/catoo-hub/kitsura-vpn/releases/download/updater/update.json",
