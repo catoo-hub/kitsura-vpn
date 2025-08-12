@@ -29,14 +29,37 @@ jobs:
       - name: Test minisign
         shell: pwsh
         run: |
-          $minisignExe = "$env:TEMP\minisign\minisign-win64\x64\minisign.exe"
+          # Find minisign executable in extracted archive
+          Write-Host "Searching for minisign.exe..."
+          $minisignFiles = Get-ChildItem "$env:TEMP\minisign" -Name "minisign.exe" -Recurse
           
-          if (-not (Test-Path $minisignExe)) {
-            Write-Error "Minisign not found at: $minisignExe"
+          if ($minisignFiles.Count -eq 0) {
+            Write-Error "No minisign.exe found in extracted archive!"
             exit 1
           }
           
-          Write-Host "✅ Minisign found at: $minisignExe"
+          # Use the first x64 version found, or any version if x64 not found
+          $minisignExe = $null
+          foreach ($file in $minisignFiles) {
+            $fullPath = Join-Path "$env:TEMP\minisign" $file
+            Write-Host "Found minisign at: $fullPath"
+            
+            # Prefer x64 version
+            if ($file -like "*x64*" -or $file -like "*x86_64*") {
+              $minisignExe = $fullPath
+              Write-Host "Using x64 version: $minisignExe"
+              break
+            } elseif ($minisignExe -eq $null) {
+              $minisignExe = $fullPath
+            }
+          }
+          
+          if ($minisignExe -eq $null) {
+            Write-Error "Could not determine minisign executable path!"
+            exit 1
+          }
+          
+          Write-Host "✅ Using minisign at: $minisignExe"
           & $minisignExe --version
           
           # Test key setup
