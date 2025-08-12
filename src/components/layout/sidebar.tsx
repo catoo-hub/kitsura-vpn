@@ -14,21 +14,22 @@ import {
 import { t } from "i18next";
 import { cn } from "@root/lib/utils";
 
-import { Home, Users, MapPin, Crown, Settings, Moon } from "lucide-react";
+import { Home, Users, MapPin, Settings, Moon } from "lucide-react";
 import { UpdateButton } from "@/components/layout/update-button";
 import React from "react";
 import { SheetClose } from "@/components/ui/sheet";
 import logo from "@/assets/image/logo.png";
 
 const menuItems = [
-  { title: "Главная", url: "/home", icon: Home },
-  { title: "Выбор локации", url: "/proxies", icon: MapPin },
-  { title: "Тарифы", url: "/profile", icon: Crown },
-  { title: "Настройки", url: "/settings", icon: Settings },
+  { title: "Label-Home", url: "/home", icon: Home },
+  { title: "Label-Proxies", url: "/proxies", icon: MapPin },
+  { title: "Label-Profiles", url: "/profile", icon: Users },
+  { title: "Label-Settings", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
   const { isMobile } = useSidebar();
+
   return (
     <Sidebar
       variant="sidebar"
@@ -56,7 +57,7 @@ export function AppSidebar() {
                   >
                     <item.icon className="h-5 w-5 flex-shrink-0" />
                     <span className="group-data-[state=collapsed]:hidden">
-                      {item.title}
+                      {t(item.title)}
                     </span>
                   </Link>
                 );
@@ -65,7 +66,7 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       asChild
                       isActive={isCurrentlyActive}
-                      tooltip={item.title}
+                      tooltip={t(item.title)}
                       className="p-0 h-auto hover:bg-transparent w-full"
                     >
                       {isMobile ? (
