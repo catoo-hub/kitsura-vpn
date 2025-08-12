@@ -1,0 +1,58 @@
+{
+  "version": "0.2.5",
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "bundle": {
+    "active": true,
+    "longDescription": "Kitsura VPN",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": ["resources", "resources/locales/*"],
+    "publisher": "Kitsura VPN",
+    "externalBin": ["sidecar/kitsura-core", "sidecar/kitsura-core-alpha"],
+    "copyright": "GNU General Public License v3.0",
+    "category": "DeveloperTool",
+    "shortDescription": "Kitsura VPN"
+  },
+  "build": {
+    "beforeBuildCommand": "pnpm run web:build",
+    "frontendDist": "../dist",
+    "beforeDevCommand": "pnpm run web:dev",
+    "devUrl": "http://localhost:3000/"
+  },
+  "productName": "Kitsura VPN",
+  "identifier": "io.github.kitsura-vpn",
+  "plugins": {
+    "updater": {
+      "active": false,
+      "pubkey": "RWSUkggwk9X2NQrfuNzOc7gcErukBClD7y9uBV8rWVJ04pO9XKVtrwgw",
+      "endpoints": [
+        "https://github.com/catoo-hub/kitsura-vpn/releases/download/updater/update.json",
+        "https://github.com/catoo-hub/kitsura-vpn/releases/download/updater-alpha/update-alpha.json"
+      ],
+      "dialog": true,
+      "windows": {
+        "installMode": "basicUi"
+      }
+    },
+    "deep-link": {
+      "desktop": {
+        "schemes": ["clash", "kitsura-vpn"]
+      }
+    }
+  },
+  "app": {
+    "security": {
+      "capabilities": ["desktop-capability", "migrated"],
+      "assetProtocol": {
+        "scope": ["$APPDATA/**", "$RESOURCE/../**", "**"],
+        "enable": true
+      },
+      "csp": null
+    }
+  }
+}
