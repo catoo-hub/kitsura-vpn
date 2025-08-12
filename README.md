@@ -42,7 +42,7 @@
 
 ## 📸 Preview
 
-<div align="center">
+<!-- <div align="center">
   
 | 🌙 Dark Theme | ☀️ Light Theme |
 | :---: | :---: |
@@ -50,7 +50,7 @@
 
 _Experience Kitsura VPN in both elegant dark and clean light themes_
 
-</div>
+</div> -->
 
 ## 📥 Installation
 
