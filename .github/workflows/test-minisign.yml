@@ -1,0 +1,61 @@
+name: Test Minisign Setup
+
+on:
+  workflow_dispatch:  # Можно запустить вручную
+
+jobs:
+  test-minisign:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install minisign (Windows)
+        run: |
+          # Download minisign binary directly
+          $minisignUrl = "https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12-win64.zip"
+          $minisignZip = "$env:TEMP\minisign.zip"
+          $minisignDir = "$env:TEMP\minisign"
+          
+          Write-Host "Downloading minisign..."
+          Invoke-WebRequest -Uri $minisignUrl -OutFile $minisignZip
+          
+          Write-Host "Extracting minisign..."
+          Expand-Archive -Path $minisignZip -DestinationPath $minisignDir -Force
+          
+          Write-Host "Contents of extracted archive:"
+          Get-ChildItem $minisignDir -Recurse | ForEach-Object { Write-Host $_.FullName }
+
+      - name: Test minisign
+        shell: pwsh
+        run: |
+          $minisignExe = "$env:TEMP\minisign\minisign-win64\x64\minisign.exe"
+          
+          if (-not (Test-Path $minisignExe)) {
+            Write-Error "Minisign not found at: $minisignExe"
+            exit 1
+          }
+          
+          Write-Host "✅ Minisign found at: $minisignExe"
+          & $minisignExe --version
+          
+          # Test key setup
+          $keyDir = "$env:USERPROFILE\.minisign"
+          New-Item -ItemType Directory -Force -Path $keyDir
+          echo "${{ secrets.MINISIGN_PRIVATE_KEY }}" | Out-File -FilePath "$keyDir\minisign.key" -Encoding utf8
+          
+          Write-Host "✅ Key file created"
+          
+          # Test signing a dummy file
+          echo "test content" | Out-File -FilePath "test.txt"
+          & $minisignExe -Sm "test.txt" -s "$keyDir\minisign.key"
+          
+          if (Test-Path "test.txt.minisig") {
+            Write-Host "✅ Test signing successful!"
+            Get-Content "test.txt.minisig"
+          } else {
+            Write-Error "❌ Test signing failed!"
+            exit 1
+          }
+        env:
+          MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}

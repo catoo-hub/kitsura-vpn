@@ -203,6 +203,19 @@ jobs:
 
           # Get minisign executable path
           $minisignExe = "$env:TEMP\minisign\minisign-win64\x64\minisign.exe"
+          
+          # Verify minisign exists
+          if (-not (Test-Path $minisignExe)) {
+            Write-Error "Minisign not found at: $minisignExe"
+            Write-Host "Contents of temp/minisign:"
+            Get-ChildItem "$env:TEMP\minisign" -Recurse | ForEach-Object { Write-Host $_.FullName }
+            exit 1
+          }
+          
+          Write-Host "Using minisign at: $minisignExe"
+          
+          # Test minisign version
+          & $minisignExe --version
 
           # Sign all setup files
           $files = Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.exe"
@@ -339,6 +352,16 @@ jobs:
           
           # Get minisign executable path
           $minisignExe = "$env:TEMP\minisign\minisign-win64\x64\minisign.exe"
+          
+          # Verify minisign exists
+          if (-not (Test-Path $minisignExe)) {
+            Write-Error "Minisign not found at: $minisignExe"
+            Write-Host "Contents of temp/minisign:"
+            Get-ChildItem "$env:TEMP\minisign" -Recurse | ForEach-Object { Write-Host $_.FullName }
+            exit 1
+          }
+          
+          Write-Host "Using minisign at: $minisignExe"
 
           # Sign all setup files
           $files = Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.exe"
