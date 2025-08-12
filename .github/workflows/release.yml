@@ -1,16 +1,17 @@
 name: Release Build
 
 on:
-  # ! 为了避免重复发布版本，应当通过独特 git tag 触发。
-  # ! 不再使用 workflow_dispatch 触发。
-  # workflow_dispatch:
   push:
-    # 应当限制在 main 分支上触发发布。
-    branches:
-      - main
-    # 应当限制 v*.*.* 的 tag 触发发布。
+    # Запускать только при создании тегов версий
     tags:
       - "v*.*.*"
+  # Разрешить ручной запуск для тестирования
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (e.g., v1.0.0)"
+        required: true
+        default: "v0.0.1"
 permissions: write-all
 env:
   CARGO_INCREMENTAL: 0
