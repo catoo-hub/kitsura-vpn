@@ -207,6 +207,10 @@ jobs:
             Write-Host "Signing: $($file.Name)"
             minisign -Sm $file.FullName -s "$keyDir\minisign.key"
           }
+          
+          # List created signature files for debugging
+          Write-Host "Created signature files:"
+          Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.minisig" | ForEach-Object { Write-Host $_.Name }
         env:
           MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
 
@@ -218,7 +222,7 @@ jobs:
           name: ${{ steps.version.outputs.version }}
           body: ${{ steps.version.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: "src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe,src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe.sig"
+          artifacts: "src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe,src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.minisig"
 
   release-for-fixed-webview2:
     name: Release Build for Fixed WebView2
@@ -336,6 +340,10 @@ jobs:
             Write-Host "Signing: $($file.Name)"
             minisign -Sm $file.FullName -s "$keyDir\minisign.key"
           }
+          
+          # List created signature files for debugging
+          Write-Host "Created signature files:"
+          Get-ChildItem ".\src-tauri\target\${{ matrix.target }}\release\bundle\nsis\*setup*.minisig" | ForEach-Object { Write-Host $_.Name }
         env:
           MINISIGN_PASSWORD: ${{ secrets.MINISIGN_PASSWORD }}
 
@@ -347,7 +355,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
             src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe
-            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.exe.sig
+            src-tauri/target/${{ matrix.target }}/release/bundle/nsis/*setup*.minisig
 
       - name: Portable Bundle
         run: pnpm portable-fixed-webview2 ${{ matrix.target }}
