@@ -269,7 +269,7 @@
   "TG Channel": "Telegram Channel",
   "Manual": "Manual",
   "Github Repo": "Github Repo",
-  "Clash Setting": "Clash Setting",
+  "Kitsura Setting": "Kitsura Setting",
   "Allow Lan": "Allow LAN",
   "Network Interface": "Network Interface",
   "Ip Address": "IP Address",
@@ -293,7 +293,7 @@
   "Open URL": "Open URL",
   "Replace host, port, secret with %host, %port, %secret": "Replace host, port, secret with %host, %port, %secret",
   "Support %host, %port, %secret": "Support %host, %port, %secret",
-  "Clash Core": "Clash Core",
+  "Kitsura Core": "Kitsura Core",
   "Upgrade": "Upgrade",
   "Restart": "Restart",
   "Release Version": "Release Version",
@@ -467,7 +467,7 @@
   "WebDAV Password": "WebDAV Password",
   "Dashboard": "Dashboard",
   "Restart App": "Restart App",
-  "Restart Clash Core": "Restart Clash Core",
+  "Restart Clash Core": "Restart Kitsura Core",
   "TUN Mode": "TUN Mode",
   "Copy Env": "Copy Env",
   "Conf Dir": "Conf Dir",
@@ -678,5 +678,7 @@
   "Template without RU Rules": "Without-ru template",
   "Stopping Core...": "Stopping Core...",
   "Uninstalling Service...": "Uninstalling Service...",
-  "Try running core as Sidecar...": "Try running core as Sidecar..."
+  "Try running core as Sidecar...": "Try running core as Sidecar...",
+
+  "Kitsura Core Settings": "Kitsura Core Settings"
 }

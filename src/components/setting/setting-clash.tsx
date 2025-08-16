@@ -159,7 +159,7 @@ const SettingClash = ({ onError }: Props) => {
 
   return (
     <div>
-      <h3 className="text-lg font-medium mb-4">{t("Clash Setting")}</h3>
+      <h3 className="text-lg font-medium mb-4">{t("Kitsura Setting")}</h3>
       <div className="space-y-1">
         <WebUIViewer ref={webRef} />
         <ClashPortViewer ref={portRef} />
@@ -301,10 +301,10 @@ const SettingClash = ({ onError }: Props) => {
         />
 
         <SettingRow
-          label={<LabelWithIcon icon={Cog} text={t("Clash Core")} />}
+          label={<LabelWithIcon icon={Cog} text={t("Kitsura Core")} />}
           extra={
             <TooltipIcon
-              tooltip={t("Clash Core Settings")}
+              tooltip={t("Kitsura Core Settings")}
               icon={<Settings className="h-4 w-4" />}
               onClick={() => coreRef.current?.open()}
             />

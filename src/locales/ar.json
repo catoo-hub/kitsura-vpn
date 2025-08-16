@@ -267,7 +267,7 @@
   "Open URL": "فتح الرابط",
   "Replace host, port, secret with %host, %port, %secret": "استبدل المضيف والمنفذ والمفتاح بـ %host و%port و%secret",
   "Support %host, %port, %secret": "يدعم %host و%port و%secret",
-  "Clash Core": "نواة Clash",
+  "Kitsura Core": "نواة Kitsura",
   "Upgrade": "ترقية",
   "Restart": "إعادة التشغيل",
   "Release Version": "إصدار مستقر",
@@ -431,7 +431,7 @@
   "Core Dir": "مجلد النواة",
   "Logs Dir": "مجلد السجلات",
   "Open Dir": "فتح المجلد",
-  "Restart Clash Core": "إعادة تشغيل نواة Clash",
+  "Restart Clash Core": "إعادة تشغيل نواة Kitsura",
   "Restart App": "إعادة تشغيل التطبيق",
   "More": "المزيد",
   "Dashboard": "لوحة التحكم",
@@ -456,5 +456,7 @@
   "TUN requires Service Mode": "يتطلب وضع TUN خدمة",
   "Install Service": "تثبيت الخدمة ",
   "Installing Service...": "جاري تثبيت الخدمة...",
-  "Service Administrator Prompt": "يتطلب Clash Verge امتيازات المسؤول لإعادة تثبيت خدمة النظام"
+  "Service Administrator Prompt": "يتطلب Clash Verge امتيازات المسؤول لإعادة تثبيت خدمة النظام",
+
+  "Kitsura Core Settings": "إعدادات Kitsura الأساسية"
 }

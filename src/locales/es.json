@@ -243,7 +243,7 @@
   "TG Channel": "Canal de Telegram",
   "Manual": "Manual de uso",
   "Github Repo": "Dirección del proyecto en GitHub",
-  "Clash Setting": "Ajustes de Clash",
+  "Kitsura Setting": "Ajustes de Kitsura",
   "Allow Lan": "Conexión a la red local",
   "Network Interface": "Interfaz de red",
   "Ip Address": "Dirección IP",
@@ -267,7 +267,7 @@
   "Open URL": "Abrir enlace",
   "Replace host, port, secret with %host, %port, %secret": "Utilice %host, %port, %secret para representar el host, el puerto y la clave de acceso.",
   "Support %host, %port, %secret": "Soporta %host, %port, %secret",
-  "Clash Core": "Núcleo de Clash",
+  "Kitsura Core": "Núcleo de Kitsura",
   "Upgrade": "Actualizar núcleo",
   "Restart": "Reiniciar núcleo",
   "Release Version": "Versión estable",
@@ -406,7 +406,7 @@
   "Web UI": "Interfaz web",
   "Dashboard": "Panel de control",
   "Restart App": "Reiniciar aplicación",
-  "Restart Clash Core": "Reiniciar el núcleo de Clash",
+  "Restart Clash Core": "Reiniciar el núcleo de Kitsura",
   "TUN Mode": "Modo TUN",
   "Copy Env": "Copiar variables de entorno",
   "Conf Dir": "Directorio de configuración",
@@ -558,5 +558,7 @@
   "Copy to clipboard": "Haz clic aquí para copiar",
   "Port Config": "Configuración de puerto",
   "Configuration saved successfully": "Configuración aleatoria guardada correctamente",
-  "Enable one-click random API port and key. Click to randomize the port and key": "Habilitar la generación de puerto y clave API aleatorios con un solo clic. Haz clic para randomizar el puerto y la clave"
+  "Enable one-click random API port and key. Click to randomize the port and key": "Habilitar la generación de puerto y clave API aleatorios con un solo clic. Haz clic para randomizar el puerto y la clave",
+
+  "Kitsura Core Settings": "Configuración del núcleo de Kitsura"
 }

@@ -372,7 +372,7 @@ pub fn create_window(is_show: bool) -> bool {
                             animation: spin 1s linear infinite;
                         "></div>
                     </div>
-                    <div style="font-size: 14px; opacity: 0.7;">Loading Clash Verge...</div>
+                    <div style="font-size: 14px; opacity: 0.7;">Loading Kitsura VPN...</div>
                 </div>
                 <style>
                     @keyframes spin {
@@ -380,7 +380,7 @@ pub fn create_window(is_show: bool) -> bool {
                         100% { transform: rotate(360deg); }
                     }
                     @media (prefers-color-scheme: dark) {
-                        :root { --bg-color: #1a1a1a; --text-color: #ffffff; }
+                        :root { --bg-color:rgb(11, 27, 61); --text-color: #ffffff; }
                     }
                 </style>
             `;
@@ -549,7 +549,7 @@ pub async fn resolve_scheme(param: String) -> Result<()> {
         }
     };
 
-    if link_parsed.scheme() == "clash" || link_parsed.scheme() == "kitsura-vpn" {
+    if link_parsed.scheme() == "clash" || link_parsed.scheme() == "mihomo" || link_parsed.scheme() == "kitsura" {
         let mut name: Option<String> = None;
         let mut url_param: Option<String> = None;
 
