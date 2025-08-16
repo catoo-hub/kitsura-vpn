@@ -1,6 +1,6 @@
 # Kitsura VPN - Update Log
 
-> 📋 **Latest Release**: [v1.0.1](https://github.com/catoo-hub/kitsura-vpn/releases/tag/v1.0.2) | 📥 **Download**: [Releases Page](https://github.com/catoo-hub/kitsura-vpn/releases)
+> 📋 **Latest Release**: [v1.0.2](https://github.com/catoo-hub/kitsura-vpn/releases/tag/v1.0.2) | 📥 **Download**: [Releases Page](https://github.com/catoo-hub/kitsura-vpn/releases)
 
 ## Version 1.0.2 (August 17, 2025)
 
