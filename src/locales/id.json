@@ -44,7 +44,7 @@
   "WebDAV Username": "Nama Pengguna WebDAV",
   "WebDAV Password": "Kata Sandi WebDAV",
   "Restart App": "Mulai Ulang Aplikasi",
-  "Restart Clash Core": "Mulai Ulang Core Kitsura",
+  "Restart Clash Core": "Mulai Ulang Core Clash",
   "TUN Mode": "Mode TUN",
   "Copy Env": "Salin Env",
   "Conf Dir": "Direktori Konfigurasi",
@@ -276,7 +276,7 @@
   "TG Channel": "Saluran Telegram",
   "Manual": "Manual",
   "Github Repo": "Repositori Github",
-  "Kitsura Setting": "Pengaturan Kitsura",
+  "Clash Setting": "Pengaturan Clash",
   "Allow Lan": "Izinkan LAN",
   "Network Interface": "Antarmuka Jaringan",
   "Ip Address": "Alamat IP",
@@ -300,7 +300,7 @@
   "Open URL": "Buka URL",
   "Replace host, port, secret with %host, %port, %secret": "Ganti host, port, rahasia dengan %host, %port, %secret",
   "Support %host, %port, %secret": "Dukung %host, %port, %secret",
-  "Kitsura Core": "Inti Kitsura",
+  "Clash Core": "Inti Clash",
   "Upgrade": "Tingkatkan",
   "Restart": "Mulai Ulang",
   "Release Version": "Versi Rilis",
@@ -452,7 +452,5 @@
   "TUN requires Service Mode": "Mode TUN memerlukan layanan",
   "Install Service": "Instal Layanan",
   "Installing Service...": "Memasang Layanan...",
-  "Service Administrator Prompt": "Clash Verge memerlukan hak administrator untuk menginstal ulang layanan sistem",
-
-  "Kitsura Core Settings": "Pengaturan Inti Kitsura"
+  "Service Administrator Prompt": "Clash Verge memerlukan hak administrator untuk menginstal ulang layanan sistem"
 }

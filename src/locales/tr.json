@@ -264,7 +264,7 @@
   "TG Channel": "Telegram Kanalı",
   "Manual": "Kılavuz",
   "Github Repo": "Github Repo",
-  "Kitsura Setting": "Kitsura Ayarı",
+  "Clash Setting": "Clash Ayarı",
   "Allow Lan": "LAN'a İzin Ver",
   "Network Interface": "Ağ Arayüzü",
   "Ip Address": "IP Adresi",
@@ -288,7 +288,7 @@
   "Open URL": "URL Aç",
   "Replace host, port, secret with %host, %port, %secret": "Ana bilgisayar, port, sırrı %host, %port, %secret ile değiştirin",
   "Support %host, %port, %secret": "%host, %port, %secret destekler",
-  "Kitsura Core": "Kitsura Çekirdeği",
+  "Clash Core": "Clash Çekirdeği",
   "Upgrade": "Yükselt",
   "Restart": "Yeniden Başlat",
   "Release Version": "Sürüm Versiyonu",
@@ -449,7 +449,7 @@
   "WebDAV Password": "WebDAV Şifresi",
   "Dashboard": "Kontrol Paneli",
   "Restart App": "Uygulamayı Yeniden Başlat",
-  "Restart Clash Core": "Kitsura Çekirdeğini Yeniden Başlat",
+  "Restart Clash Core": "Clash Çekirdeğini Yeniden Başlat",
   "TUN Mode": "TUN Modu",
   "Copy Env": "Env Kopyala",
   "Conf Dir": "Yapılandırma Dizini",
@@ -605,7 +605,5 @@
   "Originals Only": "Yalnızca Orijinaller",
   "No (IP Banned By Disney+)": "Hayır (IP Disney+ Tarafından Yasaklandı)",
   "Unsupported Country/Region": "Desteklenmeyen Ülke/Bölge",
-  "Failed (Network Connection)": "Başarısız (Ağ Bağlantısı)",
-
-  "Kitsura Core Settings": "Kitsura çekirdek ayarları"
+  "Failed (Network Connection)": "Başarısız (Ağ Bağlantısı)"
 }

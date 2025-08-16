@@ -40,7 +40,7 @@ impl NetworkManager {
         // 创建专用的异步运行时，线程数限制为4个
         let runtime = Builder::new_multi_thread()
             .worker_threads(4)
-            .thread_name("kitsura-network")
+            .thread_name("kitsura-vpn-network")
             .enable_io()
             .enable_time()
             .build()

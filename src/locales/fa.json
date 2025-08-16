@@ -245,7 +245,7 @@
   "TG Channel": "کانال تلگرام",
   "Manual": "راهنما",
   "Github Repo": "مخزن GitHub",
-  "Kitsura Setting": "تنظیمات Kitsura",
+  "Clash Setting": "تنظیمات Clash",
   "Allow Lan": "اجازه LAN",
   "Network Interface": "رابط شبکه",
   "Ip Address": "آدرس IP",
@@ -269,7 +269,7 @@
   "Open URL": "باز کردن آدرس اینترنتی",
   "Replace host, port, secret with %host, %port, %secret": "جایگزین کردن میزبان، پورت و رمز با %host، %port، %secret",
   "Support %host, %port, %secret": "پشتیبانی از %host، %port و %secret",
-  "Kitsura Core": "هسته Kitsura",
+  "Clash Core": "هسته Clash",
   "Upgrade": "ارتقاء",
   "Restart": "راه‌اندازی مجدد",
   "Release Version": "نسخه نهایی",
@@ -424,7 +424,7 @@
   "WebDAV Password": "رمز عبور WebDAV",
   "Dashboard": "داشبورد",
   "Restart App": "راه‌اندازی مجدد برنامه",
-  "Restart Clash Core": "راه‌اندازی مجدد هسته Kitsura",
+  "Restart Clash Core": "راه‌اندازی مجدد هسته Clash",
   "TUN Mode": "حالت TUN",
   "Copy Env": "کپی متغیرهای محیطی",
   "Conf Dir": "پوشه پیکربندی",
@@ -453,7 +453,5 @@
   "TUN requires Service Mode": "حالت تونل‌زنی نیاز به سرویس دارد",
   "Install Service": "نصب سرویس",
   "Installing Service...": "در حال نصب سرویس...",
-  "Service Administrator Prompt": "Clash Verge برای نصب مجدد سرویس سیستم به امتیازات مدیر نیاز دارد",
-
-  "Kitsura Core Settings": "تنظیمات هسته کیتسورا"
+  "Service Administrator Prompt": "Clash Verge برای نصب مجدد سرویس سیستم به امتیازات مدیر نیاز دارد"
 }

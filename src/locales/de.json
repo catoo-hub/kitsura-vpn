@@ -243,7 +243,7 @@
   "TG Channel": "Telegram-Kanal",
   "Manual": "Bedienungsanleitung",
   "Github Repo": "GitHub-Projektadresse",
-  "Kitsura Setting": "Kitsura-Einstellungen",
+  "Clash Setting": "Clash-Einstellungen",
   "Allow Lan": "Netzwerkverbindung im lokalen Netzwerk zulassen",
   "Network Interface": "Netzwerkschnittstelle",
   "Ip Address": "IP-Adresse",
@@ -267,7 +267,7 @@
   "Open URL": "Link öffnen",
   "Replace host, port, secret with %host, %port, %secret": "Verwenden Sie %host, %port, %secret für Host, Port und Zugangsschlüssel",
   "Support %host, %port, %secret": "Unterstützt %host, %port, %secret",
-  "Kitsura Core": "Kitsura-Kern",
+  "Clash Core": "Clash-Kern",
   "Upgrade": "Kern aktualisieren",
   "Restart": "Kern neustarten",
   "Release Version": "Stabile Version",
@@ -406,7 +406,7 @@
   "Web UI": "Web-Oberfläche",
   "Dashboard": "Dashboard",
   "Restart App": "App neu starten",
-  "Restart Clash Core": "Kitsura-Kern neu starten",
+  "Restart Clash Core": "Clash-Kern neu starten",
   "TUN Mode": "TUN-Modus",
   "Copy Env": "Umgebungsvariablen kopieren",
   "Conf Dir": "Konfigurationsverzeichnis",
@@ -558,7 +558,5 @@
   "Copy to clipboard": "Klicken Sie hier, um zu kopieren",
   "Port Config": "Port-Konfiguration",
   "Configuration saved successfully": "Zufalls-Konfiguration erfolgreich gespeichert",
-  "Enable one-click random API port and key. Click to randomize the port and key": "Einstellsichere Zufalls-API-Port- und Schlüsselgenerierung aktivieren. Klicken Sie, um Port und Schlüssel zu randomisieren",
-
-  "Kitsura Core Settings": "Kitsura -Kerneinstellungen"
+  "Enable one-click random API port and key. Click to randomize the port and key": "Einstellsichere Zufalls-API-Port- und Schlüsselgenerierung aktivieren. Klicken Sie, um Port und Schlüssel zu randomisieren"
 }

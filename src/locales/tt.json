@@ -244,7 +244,7 @@
   "TG Channel": "Telegram каналы",
   "Manual": "Документация",
   "Github Repo": "GitHub репозиториясе",
-  "Kitsura Setting": "Kitsura көйләүләре",
+  "Clash Setting": "Clash көйләүләре",
   "Allow Lan": "Локаль челтәргә рөхсәт",
   "Network Interface": "Челтәр интерфейсы",
   "Ip Address": "IP адресы",
@@ -268,7 +268,7 @@
   "Open URL": "URL ачарга",
   "Replace host, port, secret with %host, %port, %secret": "Хост, порт, серсүзне %host, %port, %secret белән алмаштырыгыз",
   "Support %host, %port, %secret": "%host, %port, %secret макросларын хуплау",
-  "Kitsura Core": "Kitsura ядросы",
+  "Clash Core": "Clash ядросы",
   "Upgrade": "Яңарту",
   "Restart": "Перезапуск",
   "Release Version": "Рәсми версия",
@@ -423,7 +423,7 @@
   "WebDAV Password": "WebDAV серсүзе",
   "Dashboard": "Панель",
   "Restart App": "Кушымтаны яңадан ачу",
-  "Restart Clash Core": "Kitsura ядрони яңадан башлап ачу",
+  "Restart Clash Core": "Clash ядрони яңадан башлап ачу",
   "TUN Mode": "TUN режимы",
   "Copy Env": "Env күчереп алу",
   "Conf Dir": "Кушымта папкасы",
@@ -452,7 +452,5 @@
   "TUN requires Service Mode": "TUN режимы хезмәт күрсәтүне таләп итә",
   "Install Service": "Хезмәтне урнаштыру",
   "Installing Service...": "Хезмәт урнаштырыла...",
-  "Service Administrator Prompt": "Clash Verge система хезмәтен яңадан урнаштыру өчен администратор хокукларын таләп итә",
-
-  "Kitsura Core Settings": "Кицура Макирация"
+  "Service Administrator Prompt": "Clash Verge система хезмәтен яңадан урнаштыру өчен администратор хокукларын таләп итә"
 }

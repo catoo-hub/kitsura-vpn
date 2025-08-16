@@ -257,7 +257,7 @@ impl IVerge {
                     warn,
                     Type::Config,
                     true,
-                    "启动时发现无效的kitsura-core配置: '{}', 将自动修正为 'kitsura-core'",
+                    "启动时发现无效的clash_core配置: '{}', 将自动修正为 'kitsura-core'",
                     core
                 );
                 config.clash_core = Some("kitsura-core".to_string());
@@ -268,7 +268,7 @@ impl IVerge {
                 info,
                 Type::Config,
                 true,
-                "启动时发现未配置kitsura-core, 将设置为默认值 'kitsura-core'"
+                "启动时发现未配置clash_core, 将设置为默认值 'kitsura-core'"
             );
             config.clash_core = Some("kitsura-core".to_string());
             needs_fix = true;
@@ -291,7 +291,7 @@ impl IVerge {
                 info,
                 Type::Config,
                 true,
-                "kitsura-core配置验证通过: {:?}",
+                "clash_core配置验证通过: {:?}",
                 config.clash_core
             );
         }
@@ -311,7 +311,7 @@ impl IVerge {
             info,
             Type::Config,
             true,
-            "内存配置已强制更新，新的kitsura-core: {:?}",
+            "内存配置已强制更新，新的clash_core: {:?}",
             updated_config.clash_core
         );
 

@@ -243,7 +243,7 @@
   "TG Channel": "Telegramチャンネル",
   "Manual": "マニュアル",
   "Github Repo": "GitHubリポジトリ",
-  "Kitsura Setting": "Kitsura設定",
+  "Clash Setting": "Clash設定",
   "Allow Lan": "LAN接続を許可",
   "Network Interface": "ネットワークインターフェース",
   "Ip Address": "IPアドレス",
@@ -267,7 +267,7 @@
   "Open URL": "URLを開く",
   "Replace host, port, secret with %host, %port, %secret": "%host, %port, %secretを使用してホスト、ポート、アクセスキーを表します。",
   "Support %host, %port, %secret": "%host, %port, %secretをサポートします。",
-  "Kitsura Core": "Kitsuraコア",
+  "Clash Core": "Clashコア",
   "Upgrade": "コアをアップグレード",
   "Restart": "コアを再起動",
   "Release Version": "正式版",
@@ -409,7 +409,7 @@
   "Web UI": "Webインターフェース",
   "Dashboard": "ダッシュボード",
   "Restart App": "アプリケーションを再起動",
-  "Restart Clash Core": "Kitsuraコアを再起動",
+  "Restart Clash Core": "Clashコアを再起動",
   "TUN Mode": "TUNモード",
   "Copy Env": "環境変数をコピー",
   "Conf Dir": "設定ディレクトリ",
@@ -561,7 +561,5 @@
   "Copy to clipboard": "クリックしてコピー",
   "Port Config": "ポート設定",
   "Configuration saved successfully": "ランダム設定を保存完了",
-  "Enable one-click random API port and key. Click to randomize the port and key": "ワンクリックでランダム API ポートとキーを有効化。ポートとキーをランダム化するにはクリックしてください",
-
-  "Kitsura Core Settings": "Kitsura Core Settings"
+  "Enable one-click random API port and key. Click to randomize the port and key": "ワンクリックでランダム API ポートとキーを有効化。ポートとキーをランダム化するにはクリックしてください"
 }

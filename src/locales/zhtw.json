@@ -243,7 +243,7 @@
   "TG Channel": "Telegram 頻道",
   "Manual": "使用手冊",
   "Github Repo": "GitHub 項目地址",
-  "Kitsura Setting": "Kitsura 設置",
+  "Clash Setting": "Clash 設置",
   "Allow Lan": "局域網連接",
   "Network Interface": "網絡接口",
   "Ip Address": "IP 地址",
@@ -267,7 +267,7 @@
   "Open URL": "打開鏈接",
   "Replace host, port, secret with %host, %port, %secret": "使用 %host, %port, %secret 表示 主機, 端口, 訪問密鑰",
   "Support %host, %port, %secret": "支持 %host, %port, %secret",
-  "Kitsura Core": "Kitsura 內核",
+  "Clash Core": "Clash 內核",
   "Upgrade": "升級內核",
   "Restart": "重啟內核",
   "Release Version": "正式版",
@@ -409,7 +409,7 @@
   "Web UI": "網頁界面",
   "Dashboard": "儀表板",
   "Restart App": "重啟應用",
-  "Restart Clash Core": "重啟 Kitsura 核心",
+  "Restart Clash Core": "重啟 Clash 核心",
   "TUN Mode": "TUN 模式",
   "Copy Env": "複製環境變量",
   "Conf Dir": "配置目錄",
@@ -561,7 +561,5 @@
   "Copy to clipboard": "點擊我複製",
   "Port Config": "端口設置",
   "Configuration saved successfully": "配置保存完成",
-  "Enable one-click random API port and key. Click to randomize the port and key": "開啟一鍵隨機 API 端口和密鑰，點進去就可以隨機端口和密鑰",
-
-  "Kitsura Core Settings": "Kitsura Core Settings"
+  "Enable one-click random API port and key. Click to randomize the port and key": "開啟一鍵隨機 API 端口和密鑰，點進去就可以隨機端口和密鑰"
 }
