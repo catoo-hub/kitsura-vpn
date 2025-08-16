@@ -269,7 +269,7 @@
   "TG Channel": "Telegram 频道",
   "Manual": "使用手册",
   "Github Repo": "GitHub 项目地址",
-  "Clash Setting": "Clash 设置",
+  "Kitsura Setting": "Kitsura 设置",
   "Allow Lan": "局域网连接",
   "Network Interface": "网络接口",
   "Ip Address": "IP 地址",
@@ -293,7 +293,7 @@
   "Open URL": "打开链接",
   "Replace host, port, secret with %host, %port, %secret": "使用 %host, %port, %secret 表示 主机, 端口, 访问密钥",
   "Support %host, %port, %secret": "支持 %host, %port, %secret",
-  "Clash Core": "Clash 内核",
+  "Kitsura Core": "Kitsura 内核",
   "Upgrade": "升级内核",
   "Restart": "重启内核",
   "Release Version": "正式版",
@@ -467,7 +467,7 @@
   "WebDAV Password": "WebDAV 密码",
   "Dashboard": "仪表板",
   "Restart App": "重启应用",
-  "Restart Clash Core": "重启 Clash 核心",
+  "Restart Clash Core": "重启 Kitsura 核心",
   "TUN Mode": "TUN 模式",
   "Copy Env": "复制环境变量",
   "Conf Dir": "配置目录",
@@ -639,5 +639,7 @@
   "AppHiddenTitle": "应用隐藏",
   "AppHiddenBody": "已通过快捷键隐藏应用窗口",
   "Invalid Profile URL": "无效的订阅链接，请输入以 http:// 或 https:// 开头的地址",
-  "Saved Successfully": "保存成功"
+  "Saved Successfully": "保存成功",
+
+  "Kitsura Core Settings": "Kitsura核心设置"
 }

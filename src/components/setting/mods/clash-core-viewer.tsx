@@ -104,7 +104,7 @@ export const ClashCoreViewer = forwardRef<DialogRef>((props, ref) => {
         {/* Добавляем отступ справа (pr-12), чтобы освободить место для крестика */}
         <DialogHeader className="pr-12">
           <div className="flex justify-between items-center">
-            <DialogTitle>{t("Clash Core")}</DialogTitle>
+            <DialogTitle>{t("Kitsura Core")}</DialogTitle>
             <div className="flex items-center gap-2">
               <Button
                 size="sm"

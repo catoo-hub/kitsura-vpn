@@ -269,7 +269,7 @@
   "TG Channel": "Telegram-канал",
   "Manual": "Документация",
   "Github Repo": "GitHub репозиторий",
-  "Clash Setting": "Настройки Clash",
+  "Kitsura Setting": "Настройки Kitsura",
   "Allow Lan": "Разрешить доступ из локальной сети",
   "Network Interface": "Сетевой интерфейс",
   "Ip Address": "IP адрес",
@@ -293,7 +293,7 @@
   "Open URL": "Перейти по адресу",
   "Replace host, port, secret with %host, %port, %secret": "Замените хост, порт и секрет на %host, %port, %secret",
   "Support %host, %port, %secret": "Поддерживаются %host, %port, %secret",
-  "Clash Core": "Ядро Clash",
+  "Kitsura Core": "Ядро Kitsura",
   "Upgrade": "Обновить",
   "Restart": "Перезапустить",
   "Release Version": "Официальная версия",
@@ -467,7 +467,7 @@
   "WebDAV Password": "Пароль WebDAV",
   "Dashboard": "Панель управления",
   "Restart App": "Перезапустить приложение",
-  "Restart Clash Core": "Перезапустить ядро Clash",
+  "Restart Clash Core": "Перезапустить ядро Kitsura",
   "TUN Mode": "Режим TUN",
   "Copy Env": "Копировать переменные окружения",
   "Conf Dir": "Директория конфигурации",
@@ -678,5 +678,7 @@
   "Template without RU Rules": "Шаблон without-ru",
   "Stopping Core...": "Остановка ядра...",
   "Uninstalling Service...": "Удаление сервиса...",
-  "Try running core as Sidecar...": "Попытка запустить ядро как Sidecar..."
+  "Try running core as Sidecar...": "Попытка запустить ядро как Sidecar...",
+
+  "Kitsura Core Settings": "Настройки ядра Kitsura"
 }
