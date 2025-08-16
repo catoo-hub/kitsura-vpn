@@ -1,6 +1,28 @@
 # Kitsura VPN - Update Log
 
-> 📋 **Latest Release**: [v1.0.1](https://github.com/catoo-hub/kitsura-vpn/releases/tag/v1.0.1) | 📥 **Download**: [Releases Page](https://github.com/catoo-hub/kitsura-vpn/releases)
+> 📋 **Latest Release**: [v1.0.1](https://github.com/catoo-hub/kitsura-vpn/releases/tag/v1.0.2) | 📥 **Download**: [Releases Page](https://github.com/catoo-hub/kitsura-vpn/releases)
+
+## Version 1.0.2 (August 17, 2025)
+
+### 🔧 Configuration & Localization Refactor
+
+- **Configuration settings and messages**: Updated system configuration parameters and user messages
+- **Thread names**: Modified network and system thread naming conventions
+- **Application loading screen**: Updated text and messages displayed during app startup
+- **Supported URL schemes**: Enhanced and modified supported URL protocols
+- **UI components and localization**: Refactored interface components and updated multiple language files
+
+### 📝 Summary
+
+This refactor includes modifications to:
+
+- Configuration settings and messages
+- Thread names
+- Loading screen text
+- Supported URL schemes
+- UI components and locales
+
+---
 
 ## Version 1.0.1 (August 12, 2025)
 
